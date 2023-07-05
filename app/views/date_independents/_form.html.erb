@@ -1,0 +1,41 @@
+
+<%= error_messages_for 'date_independent' %>
+
+<div class="box tabular">
+  <%# タイトル %>
+  <p>
+    <%= form.text_field :title,
+        :size => 100,
+        :required => true,
+        :disabled => (disabled || false)  %>
+    <em class="info">
+      <%= l(:text_title_info) %>
+    </em>
+  </p>
+  <%# 有効 %>
+  <p>
+    <%= form.check_box :is_enabled,
+        :disabled => (disabled || false) %>
+  </p>
+  <%# プロジェクト %>
+  <p>
+    <%= form.text_field :project_pattern,
+        :size => 100,
+        :required => true,
+        :disabled => (disabled || false) %>
+    <em class="info">
+      <%= l(:text_project_pattern_info) %><br />
+    </em>
+  </p>
+
+  <%# 連動させるステータス %>
+  <p>
+    <%= form.text_field :calculate_status_pattern,
+        :size => 100,
+        :disabled => (disabled || false) %>
+    <em class="info">
+      <%= l(:text_calculate_status_pattern_info) %><br />
+    </em>
+  </p>
+
+</div>

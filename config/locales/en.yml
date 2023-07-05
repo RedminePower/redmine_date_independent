@@ -1,0 +1,11 @@
+en:
+  label_date_independent: "Date Independent"
+  label_date_independent_new: "New date independent"
+  label_date_independent_plural: "Date Independents"
+  field_title: "Title"
+  field_is_enabled: "Enabled"
+  field_project_pattern: "Target Projects"
+  field_calculate_status_pattern: "Not applied status"
+  text_title_info: "Please enter a clear name to manage."
+  text_project_pattern_info: "Project (identifier) pattern you wish to apply this setting is specified with a regular expression. (e.g. proj-a|proj-b)"
+  text_calculate_status_pattern_info: "Status pattern without applying this setting is specified with a regular expression. (e.g. New|Progress)"

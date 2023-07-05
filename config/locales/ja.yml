@@ -1,0 +1,11 @@
+ja:
+  label_date_independent: "日付の独立"
+  label_date_independent_new: "新しい日付の独立"
+  label_date_independent_plural: "日付の独立"
+  field_title: "タイトル"
+  field_is_enabled: "有効"
+  field_project_pattern: "対象プロジェクト"
+  field_calculate_status_pattern: "適用しないステータス"
+  text_title_info: "管理する上でわかりやすい名前を入力してください。"
+  text_project_pattern_info: "本設定を適用するプロジェクト(識別子)を正規表現で指定します。 (例 proj-a|proj-b)"
+  text_calculate_status_pattern_info: "本設定を適用せず、連動を行うステータスを正規表現で指定します。 (例 新規|進行中)"
