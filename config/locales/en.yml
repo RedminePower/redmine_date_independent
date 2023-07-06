@@ -1,7 +1,7 @@
 en:
-  label_date_independent: "Date Independent"
-  label_date_independent_new: "New date independent"
-  label_date_independent_plural: "Date Independents"
+  label_date_independent: "Independent of start date/due date"
+  label_date_independent_new: "New independent of start date/due date"
+  label_date_independent_plural: "Independent of start date/due date"
   field_title: "Title"
   field_is_enabled: "Enabled"
   field_project_pattern: "Target Projects"

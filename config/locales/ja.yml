@@ -1,7 +1,7 @@
 ja:
-  label_date_independent: "日付の独立"
-  label_date_independent_new: "新しい日付の独立"
-  label_date_independent_plural: "日付の独立"
+  label_date_independent: "開始日/期日の独立"
+  label_date_independent_new: "新しい開始日/期日の独立"
+  label_date_independent_plural: "開始日/期日の独立"
   field_title: "タイトル"
   field_is_enabled: "有効"
   field_project_pattern: "対象プロジェクト"
