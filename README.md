@@ -1,49 +1,43 @@
-# redmine_auto_close
+# redmine_date_independent
 
 ## 機能
-
-- このプラグインインは、特定のトリガで、該当チケットのステータスを終了にしたり、担当者を変更したりすることができます。
-  - 初版では、「全子チケット終了時」のトリガのみをサポートしています。
-  - 今後は、「期限切れ時」のトリガもサポート予定です。
-- 主に [Redmine Time Puncher](https://www.redmine-power.com/) のレビュー機能と、合わせて使うことで、効果を発揮することができます。
-  - 「Redmine Time Puncher」のレビュー機能では、レビュー対象の配下に、レビュー依頼のチケットおよび、レビュー指摘のチケットが作成されます。
-  - 全員がレビューを実施済みになり、すべてのレビュー指摘が終了になったら、レビュー開催のチケットを自動で終了にすることができます。 
+- このプラグインインは、特定のプロジェクトのみ、「開始日 / 期日」を「子チケットから独立」に設定することができます。
+  - 通常では「親チケットの値の算出方法」の「開始日 / 期日」の設定はプロジェクトごとには設定できません。
+  - 「子チケットの値から算出」の場合、子チケットの期日を変更するとそれに連動して親チケットの期日が変更されます。
+  - 「全体の設定では連動するようになっているが、特定のプロジェクトでは独立させたい」という場合にお使いください。
+- またオプションとして、特定のステータスのチケットは「子チケットの値から算出」に設定することもできます。
 
 ## 対応Redmine
 - V4.x (V4.2.3にて動作確認済み)
+- V5.x (V5.0.3にて動作確認済み)
 
 ## インストール
-- Redmineのプラグインのディレクトリにて、以下を実行してください。
+- Redmineのプラグインのディレクトリにて、以下を実行し、Redmineを再起動してください。
 
 ```
 $ cd /var/lib/redmine/plugins
-$ git clone https://github.com/RedminePower/redmine_auto_close.git
-$ bundle exec rake redmine:plugins:migrate NAME=redmine_auto_close RAILS_ENV=production
+$ git clone https://github.com/RedminePower/redmine_date_independent.git
+$ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_ENV=production
 ```
 
 ## 使用方法
-プラグインをインストールすると、管理者メニューに「自動クローズ」が追加されます。
 
-![image](https://user-images.githubusercontent.com/87136359/226633071-159626ee-aca0-4724-b651-187ca66de7b2.png)
+1. プラグインをインストールすると、管理者メニューに「開始日/期日の独立」が追加されます。
+![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/d282d917-916e-4c5c-bfad-eec0f208356f)
+1. 「開始日/期日の独立」を押下すると、一覧画面に遷移します。
+![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/bf0fbc0e-5b68-4596-8ca1-9a251261ddbc)
+1. 「新しい開始日/期日の独立」を押下し、各種項目を入力し、「作成」ボタンを押下してください。
+![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/158da482-8b27-409b-9377-f6ee554ff3d8)
 
-「自動クローズ」を押下すると、一覧画面に遷移します。
-
-![image](https://user-images.githubusercontent.com/87136359/226633407-4cac6c54-d2fe-4d13-95fb-3c60c7ad765a.png)
-
-「新しい自動クローズ」を押下し、各種項目を入力し、「OK」ボタンを押下してください。
-
-![image](https://user-images.githubusercontent.com/87136359/226633705-caf445eb-c687-478a-bd71-f126856582ae.png)
-
-「トリガ」にて設定した条件を満たした場合に、「アクション」で指定した内容を実行します。
 
 ## アンインストール
 
-- 以下のコマンドを実行して、追加したDBを削除後に、配置したプラグインフォルダを削除してください。
+- 以下のコマンドを実行して、追加したDBを削除後に、配置したプラグインのフォルダを削除してください。
 
 ```
 $ cd /var/lib/redmine/plugins
-$ bundle exec rake redmine:plugins:migrate NAME=redmine_auto_close VERSION=0 RAILS_ENV=production
-$ rm -rf redmine_auto_close
+$ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent VERSION=0 RAILS_ENV=production
+$ rm -rf redmine_date_independent
 ```
 
 
