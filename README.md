@@ -23,7 +23,7 @@ $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_E
 ## 使用方法
 
 1. プラグインをインストールすると、管理者メニューに「開始日/期日の独立」が追加されます。
-![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/d282d917-916e-4c5c-bfad-eec0f208356f)
+![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/febd0e09-ac77-47c4-810e-8521d6db9ef0)
 1. 「開始日/期日の独立」を押下すると、一覧画面に遷移します。
 ![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/bf0fbc0e-5b68-4596-8ca1-9a251261ddbc)
 1. 「新しい開始日/期日の独立」を押下し、各種項目を入力し、「作成」ボタンを押下してください。
