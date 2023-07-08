@@ -12,7 +12,7 @@ Redmine::Plugin.register :redmine_date_independent do
 
   menu :admin_menu, :date_independents,
     { :controller => 'date_independents', :action => 'index' },
-    :caption => :label_date_independent,
+    :caption => :di_label_date_independent,
     :html => { :class => 'icon icon-date_independent'},
     :if => Proc.new { User.current.admin? }
 

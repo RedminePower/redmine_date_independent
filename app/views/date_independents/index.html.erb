@@ -1,9 +1,9 @@
 <div class="contextual">
-  <%= link_to l(:label_date_independent_new), 
+  <%= link_to l(:di_label_date_independent_new), 
       new_date_independent_path, :class => 'icon icon-add' %>
 </div>
 
-<%= title l(:label_date_independent_plural) %>
+<%= title l(:di_label_date_independent_plural) %>
 
 <% if (@date_independents.blank?) %>
   <p class="nodata"><%= l(:label_no_data) %></p>
@@ -13,10 +13,10 @@
   <thead>
     <tr>
       <%= sort_header_tag('id', :caption => '#') %>
-      <%= sort_header_tag('is_enabled', :caption => l(:field_is_enabled)) %>
-      <%= sort_header_tag('title', :caption => l(:field_title)) %>
-      <%= sort_header_tag('project_pattern', :caption => l(:field_project_pattern)) %>
-      <%= sort_header_tag('calculate_status_pattern', :caption => l(:field_calculate_status_pattern)) %>
+      <%= sort_header_tag('is_enabled', :caption => l(:di_field_is_enabled)) %>
+      <%= sort_header_tag('title', :caption => l(:di_field_title)) %>
+      <%= sort_header_tag('project_pattern', :caption => l(:di_field_project_pattern)) %>
+      <%= sort_header_tag('calculate_status_pattern', :caption => l(:di_field_calculate_status_pattern)) %>
     </tr>
   </thead>
   <tbody>

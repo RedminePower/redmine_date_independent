@@ -5,36 +5,40 @@
   <%# タイトル %>
   <p>
     <%= form.text_field :title,
+        :label => l(:di_field_title),
         :size => 100,
         :required => true,
         :disabled => (disabled || false)  %>
     <em class="info">
-      <%= l(:text_title_info) %>
+      <%= l(:di_text_title_info) %>
     </em>
   </p>
   <%# 有効 %>
   <p>
     <%= form.check_box :is_enabled,
+        :label => l(:di_field_is_enabled),
         :disabled => (disabled || false) %>
   </p>
-  <%# プロジェクト %>
+  <%# 対象プロジェクト %>
   <p>
     <%= form.text_field :project_pattern,
+        :label => l(:di_field_project_pattern),
         :size => 100,
         :required => true,
         :disabled => (disabled || false) %>
     <em class="info">
-      <%= l(:text_project_pattern_info) %><br />
+      <%= l(:di_text_project_pattern_info) %><br />
     </em>
   </p>
 
-  <%# 連動させるステータス %>
+  <%# 適用しないステータス %>
   <p>
     <%= form.text_field :calculate_status_pattern,
+        :label => l(:di_field_calculate_status_pattern),
         :size => 100,
         :disabled => (disabled || false) %>
     <em class="info">
-      <%= l(:text_calculate_status_pattern_info) %><br />
+      <%= l(:di_text_calculate_status_pattern_info) %><br />
     </em>
   </p>
 

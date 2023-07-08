@@ -28,7 +28,7 @@ module RedmineDateIndependent
       end
 
       settings = DateIndependent.all.order(:id).select {|s| s.is_enabled && self.project.identifier =~ Regexp.new(s.project_pattern) }
-      # チケットのプロジェクトと一致する「対象プロジェクト」を持つ「有効」な「日付の独立」設定が一つもなければ連動させる
+      # チケットのプロジェクトと一致する「対象プロジェクト」を持つ「有効」な「開始日/期日の独立」設定が一つもなければ連動させる
       if settings.empty?
         return true
       end
