@@ -6,7 +6,7 @@ Redmine::Plugin.register :redmine_date_independent do
   name 'Redmine Date Independent plugin'
   author 'Redmine Power'
   description 'This plugin allows the start and due dates of parent issue to be set independently of child issues.'
-  version '1.0.0'
+  version '1.0.1'
   url 'https://github.com/RedminePower/redmine_date_independent'
   author_url 'https://www.en.redmine-power.com/'
 
