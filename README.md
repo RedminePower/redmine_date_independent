@@ -18,7 +18,7 @@
 - V5.x (V5.0.3にて動作確認済み)
 
 ## インストール
-Redmineのプラグインのディレクトリにて、以下を実行し、Redmineを再起動してください。
+Redmineのプラグインのフォルダにて、以下を実行し、Redmineを再起動してください。
 
 ```
 $ cd /var/lib/redmine/plugins
