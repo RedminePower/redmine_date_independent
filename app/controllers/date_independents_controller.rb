@@ -10,7 +10,12 @@ class DateIndependentsController < ApplicationController
   def index
     sort_init 'id', 'desc'
     sort_update %w(id path_pattern)
-    @date_independents = DateIndependent.order(sort_clause)
+    items = DateIndependent.order(sort_clause)
+    for item in items do
+      item.migrate_project_pattern
+    end
+    @date_independents = items
+
   end
 
   def new
@@ -19,6 +24,7 @@ class DateIndependentsController < ApplicationController
 
   def create
     @date_independent = DateIndependent.new(date_independent_params)
+    @date_independent.project_ids = params[:date_independent][:project_ids]&.select(&:present?).map(&:to_i) || []
 
     if @date_independent.save
       flash[:notice] = l(:notice_successful_create)
@@ -36,6 +42,8 @@ class DateIndependentsController < ApplicationController
 
   def update
     @date_independent.attributes = date_independent_params
+    @date_independent.project_ids = params[:date_independent][:project_ids]&.select(&:present?).map(&:to_i) || []
+
     if @date_independent.save
       flash[:notice] = l(:notice_successful_update)
       redirect_to date_independent_path(@date_independent.id)
@@ -69,10 +77,11 @@ class DateIndependentsController < ApplicationController
   def date_independent_params
     params.require(:date_independent)
       .permit(
-        :title, 
+        :title,
         :is_enabled,
         :project_pattern,
-        :calculate_status_pattern
+        :calculate_status_pattern,
+        :project_ids
       )
   end
 
