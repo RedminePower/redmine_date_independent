@@ -33,19 +33,21 @@ module RedmineDateIndependent
         return true
       end
 
-      date_independent = settings[0]
+      settings_with_calculate_status = settings.select {|t| t.calculate_status_ids.present? }
       # 「適用しないステータス」が設定されていなければ連動しない
-      if date_independent.calculate_status_pattern.empty?
+      if settings_with_calculate_status.empty?
         return false
       end
 
-      status = IssueStatus.find_by_id(status_id)
-      # チケットのステータスが「適用しないステータス」と一致していたら連動させる
-      if status.name =~ Regexp.new(date_independent.calculate_status_pattern)
-        return true
-      else
-        return false
-      end
+      # チケットのステータスと「適用しないステータス」が一致する設定があれば連動させる
+      settings_with_calculate_status.each {|t|
+        if t.calculate_status_ids.include?(status_id)
+          return true
+        end
+      }
+
+      # チケットのステータスが「適用しないステータス」になければ連動させない
+      return false
     end
 
   end

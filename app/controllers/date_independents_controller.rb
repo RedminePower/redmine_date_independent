@@ -25,6 +25,7 @@ class DateIndependentsController < ApplicationController
   def create
     @date_independent = DateIndependent.new(date_independent_params)
     @date_independent.project_ids = params[:date_independent][:project_ids]&.select(&:present?).map(&:to_i) || []
+    @date_independent.calculate_status_ids = params[:date_independent][:calculate_status_ids]&.select(&:present?).map(&:to_i) || []
 
     if @date_independent.save
       flash[:notice] = l(:notice_successful_create)
@@ -43,6 +44,7 @@ class DateIndependentsController < ApplicationController
   def update
     @date_independent.attributes = date_independent_params
     @date_independent.project_ids = params[:date_independent][:project_ids]&.select(&:present?).map(&:to_i) || []
+    @date_independent.calculate_status_ids = params[:date_independent][:calculate_status_ids]&.select(&:present?).map(&:to_i) || []
 
     if @date_independent.save
       flash[:notice] = l(:notice_successful_update)
@@ -81,7 +83,8 @@ class DateIndependentsController < ApplicationController
         :is_enabled,
         :project_pattern,
         :calculate_status_pattern,
-        :project_ids
+        :project_ids,
+        :calculate_status_ids
       )
   end
 

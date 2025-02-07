@@ -37,15 +37,20 @@
       <%= l(:di_text_project_info) %><br />
     </em>
   </p>
-
   <%# 適用しないステータス %>
   <p>
-    <%= form.text_field :calculate_status_pattern,
-        :label => l(:di_field_calculate_status_pattern),
-        :size => 100,
-        :disabled => (disabled || false) %>
+    <%= form.select :calculate_status_ids,
+          options_for_select(
+            [""] + IssueStatus.all.map{|t| [t.name, t.id]},
+            :selected => @date_independent.calculate_status_ids),
+          {
+            :label => l(:di_field_calculate_status)
+          },
+          :size => (IssueStatus.all.size < 10 ? IssueStatus.all.size + 1 : 10),
+          :multiple => true,
+          :disabled => (disabled || false) %>
     <em class="info">
-      <%= l(:di_text_calculate_status_pattern_info) %><br />
+      <%= l(:di_text_calculate_status_info) %><br />
     </em>
   </p>
 

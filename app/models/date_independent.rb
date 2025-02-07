@@ -4,6 +4,7 @@ class DateIndependent < ActiveRecord::Base
   validate :valid_action
 
   serialize :project_ids, Array
+  serialize :calculate_status_ids, Array
 
   def project_ids
     return super.presence&.map(&:to_i) || []
@@ -30,6 +31,34 @@ class DateIndependent < ActiveRecord::Base
       ""
     else
       Project.where(id: project_ids).pluck(:name).join(", ")
+    end
+  end
+
+  def calculate_status_ids
+    return super.presence&.map(&:to_i) || []
+  end
+
+  def calculate_status_ids=(values)
+    super(values.map(&:to_i))
+  end
+
+  # プロジェクトの設定方法を calculate_status_pattern から calculate_status_ids に切り替えたので
+  # calculate_status_pattern での設定が残っていたら、それをもとに calculate_status_ids を設定する
+  def migrate_calculate_status_pattern
+    if calculate_status_pattern.present?
+      s_ids = IssueStatus.all.select { |s| s.identifier =~ Regexp.new(calculate_status_pattern) }.map(&:id)
+      Rails.logger.info "#{self.class} id=#{id} title=#{title} migrate calculate_status_pattern=#{calculate_status_pattern} -> calculate_status_ids=#{s_ids}"
+      self.calculate_status_ids = s_ids
+      self.calculate_status_pattern = nil
+      save
+    end
+  end
+
+  def calculate_status_ids_label
+    if calculate_status_ids.nil?
+      ""
+    else
+      IssueStatus.where(id: calculate_status_ids).pluck(:name).join(", ")
     end
   end
 
