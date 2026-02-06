@@ -88,7 +88,7 @@ puts plugin.version
 
 **期待結果:**
 - name: `Redmine Date Independent plugin`
-- version: `1.0.2`
+- version: `1.1.0`
 
 ### [1-2] 管理メニュー登録確認
 
