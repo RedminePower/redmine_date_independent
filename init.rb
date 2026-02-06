@@ -1,4 +1,6 @@
-require_dependency 'issue'
+# frozen_string_literal: true
+
+require_relative 'lib/redmine_date_independent/hooks'
 
 Issue.prepend(RedmineDateIndependent::IssuePatch)
 

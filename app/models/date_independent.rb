@@ -1,10 +1,18 @@
+# frozen_string_literal: true
+
 class DateIndependent < ActiveRecord::Base
   validates_presence_of :title
 
   validate :valid_action
 
-  serialize :project_ids, Array
-  serialize :calculate_status_ids, Array
+  # Rails 7.1+ では serialize の引数が変更された
+  if Rails::VERSION::MAJOR >= 7 && Rails::VERSION::MINOR >= 1
+    serialize :project_ids, type: Array
+    serialize :calculate_status_ids, type: Array
+  else
+    serialize :project_ids, Array
+    serialize :calculate_status_ids, Array
+  end
 
   def project_ids
     return super.presence&.map(&:to_i) || []
@@ -27,7 +35,7 @@ class DateIndependent < ActiveRecord::Base
   end
 
   def project_ids_label
-    if project_ids.nil?
+    if project_ids.empty?
       ""
     else
       Project.where(id: project_ids).pluck(:name).join(", ")
@@ -46,7 +54,7 @@ class DateIndependent < ActiveRecord::Base
   # calculate_status_pattern での設定が残っていたら、それをもとに calculate_status_ids を設定する
   def migrate_calculate_status_pattern
     if calculate_status_pattern.present?
-      s_ids = IssueStatus.all.select { |s| s.identifier =~ Regexp.new(calculate_status_pattern) }.map(&:id)
+      s_ids = IssueStatus.all.select { |s| s.name =~ Regexp.new(calculate_status_pattern) }.map(&:id)
       Rails.logger.info "#{self.class} id=#{id} title=#{title} migrate calculate_status_pattern=#{calculate_status_pattern} -> calculate_status_ids=#{s_ids}"
       self.calculate_status_ids = s_ids
       self.calculate_status_pattern = nil
@@ -55,7 +63,7 @@ class DateIndependent < ActiveRecord::Base
   end
 
   def calculate_status_ids_label
-    if calculate_status_ids.nil?
+    if calculate_status_ids.empty?
       ""
     else
       IssueStatus.where(id: calculate_status_ids).pluck(:name).join(", ")
@@ -65,7 +73,7 @@ class DateIndependent < ActiveRecord::Base
   def valid_action
 
     # プロジェクト情報は必須
-    if project_ids.nil? && project_pattern.nil?
+    if project_ids.empty? && project_pattern.blank?
       errors.add(:project_ids, :invalid)
     end
 

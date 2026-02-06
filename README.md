@@ -14,15 +14,16 @@
 - 「開始日 / 期日」が「子チケットの値から算出」に設定されていても、**特定のプロジェクトのみ、「子チケットから独立」させる**
 - 独立させたいプロジェクトでも、特定のステータスのチケットのみ、「子チケットの値から算出」のままにして、期日の連動させる
 
-## 対応Redmine
-- V4.x (V4.2.3にて動作確認済み)
-- V5.x (V5.0.3にて動作確認済み)
+## 対応バージョン
+- Redmine 4.x（4.2.3 にて動作確認済み）
+- Redmine 5.x（5.1.11 にて動作確認済み）
+- Redmine 6.x（6.1.1 にて動作確認済み）
 
 ## インストール
 Redmineのプラグインのフォルダにて、以下を実行し、Redmineを再起動してください。
 
 ```
-$ cd /var/lib/redmine/plugins
+$ cd /path/to/redmine/plugins
 $ git clone https://github.com/RedminePower/redmine_date_independent.git
 $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_ENV=production
 ```
@@ -40,7 +41,7 @@ $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_E
 以下のコマンドを実行して、追加したDBを削除し、プラグインのフォルダを削除してください。
 
 ```
-$ cd /var/lib/redmine/plugins
+$ cd /path/to/redmine/plugins
 $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent VERSION=0 RAILS_ENV=production
 $ rm -rf redmine_date_independent
 ```

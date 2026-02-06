@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RedmineDateIndependent
   class Hooks < Redmine::Hook::ViewListener
 

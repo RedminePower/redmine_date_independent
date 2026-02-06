@@ -1,4 +1,4 @@
-require_dependency 'issue'
+# frozen_string_literal: true
 
 module RedmineDateIndependent
   module IssuePatch
@@ -27,7 +27,7 @@ module RedmineDateIndependent
         return false
       end
 
-      settings = DateIndependent.all.order(:id).select {|s| s.is_enabled && s.project_ids.include?(self.project.id) }
+      settings = DateIndependent.where(is_enabled: true).order(:id).select {|s| s.project_ids.include?(self.project.id) }
       # 「有効」かつ「対象プロジェクト」にチケットのプロジェクトを含む設定が無ければ連動させる
       if settings.empty?
         return true

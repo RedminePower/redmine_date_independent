@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DateIndependentsController < ApplicationController
   layout 'admin'
 
@@ -9,10 +11,11 @@ class DateIndependentsController < ApplicationController
 
   def index
     sort_init 'id', 'desc'
-    sort_update %w(id path_pattern)
+    sort_update %w(id title is_enabled)
     items = DateIndependent.order(sort_clause)
     for item in items do
       item.migrate_project_pattern
+      item.migrate_calculate_status_pattern
     end
     @date_independents = items
 
@@ -57,13 +60,6 @@ class DateIndependentsController < ApplicationController
     render :action => 'edit'
   end
 
-  def update_all
-    DateIndependent.update_all(date_independent_params.to_hash)
-
-    flash[:notice] = l(:notice_successful_update)
-    redirect_to date_independents_path
-  end
-
   def destroy
     @date_independent.destroy
     redirect_to date_independents_path
@@ -73,7 +69,6 @@ class DateIndependentsController < ApplicationController
 
   def find_date_independent
     @date_independent = DateIndependent.find(params[:id])
-    render_404 unless @date_independent
   end
 
   def date_independent_params
