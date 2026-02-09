@@ -20,11 +20,23 @@
 - Redmine 6.x（6.1.1 にて動作確認済み）
 
 ## インストール
-Redmineのプラグインのフォルダにて、以下を実行し、Redmineを再起動してください。
+
+Redmine のインストール先はお使いの環境によって異なります。
+以下の説明では `/var/lib/redmine` を使用しています。
+お使いの環境に合わせて変更してください。
+
+| 環境 | Redmine パス |
+|------|-------------|
+| apt (Debian/Ubuntu) | `/var/lib/redmine` |
+| Docker (公式イメージ) | `/usr/src/redmine` |
+| Bitnami | `/opt/bitnami/redmine` |
+
+以下を実行し、Redmineを再起動してください。
 
 ```
-$ cd /path/to/redmine/plugins
+$ cd /var/lib/redmine/plugins
 $ git clone https://github.com/RedminePower/redmine_date_independent.git
+$ cd /var/lib/redmine
 $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_ENV=production
 ```
 
@@ -41,9 +53,9 @@ $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_E
 以下のコマンドを実行して、追加したDBを削除し、プラグインのフォルダを削除してください。
 
 ```
-$ cd /path/to/redmine/plugins
+$ cd /var/lib/redmine
 $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent VERSION=0 RAILS_ENV=production
-$ rm -rf redmine_date_independent
+$ rm -rf plugins/redmine_date_independent
 ```
 
 

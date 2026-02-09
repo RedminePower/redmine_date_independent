@@ -23,11 +23,22 @@ This plugin provides the following features:
 
 ## Installation
 
-Run the following commands in your Redmine plugins folder, then restart Redmine.
+The Redmine installation path varies depending on your environment.
+The following instructions use `/var/lib/redmine`.
+Please adjust according to your environment.
+
+| Environment | Redmine Path |
+|-------------|--------------|
+| apt (Debian/Ubuntu) | `/var/lib/redmine` |
+| Docker (Official Image) | `/usr/src/redmine` |
+| Bitnami | `/opt/bitnami/redmine` |
+
+Run the following commands, then restart Redmine.
 
 ```
-$ cd /path/to/redmine/plugins
+$ cd /var/lib/redmine/plugins
 $ git clone https://github.com/RedminePower/redmine_date_independent.git
+$ cd /var/lib/redmine
 $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_ENV=production
 ```
 
@@ -45,7 +56,7 @@ $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_E
 Run the following commands to remove the database tables and delete the plugin folder.
 
 ```
-$ cd /path/to/redmine/plugins
+$ cd /var/lib/redmine
 $ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent VERSION=0 RAILS_ENV=production
-$ rm -rf redmine_date_independent
+$ rm -rf plugins/redmine_date_independent
 ```
