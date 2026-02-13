@@ -1,21 +1,19 @@
 # redmine_date_independent
 
-![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/b6ec8743-bdc8-436f-a712-f3c174cf40f1)
+> **Tip**: [redmine_studio_plugin](https://github.com/RedminePower/redmine_studio_plugin) を使うと、この機能を含む複数の便利な機能をまとめて管理できます。
+> また、[Redmine Studio](https://www.redmine-power.com/) と組み合わせると、より快適に Redmine をお使いいただけます。
 
-「子チケットの値から算出」の場合、**子チケットの期日** を変更するとそれに連動して **親チケットの期日** が変更されます。そして、この設定は全体の設定であり、プロジェクトごとには設定できません。
+## 概要
 
-しかし、実運用では「_特定のプロジェクトや特定のチケットにおいては、期日の連動をさせたくない_」という場合があるのではないでしょうか？
+親チケットの開始日・期日を子チケットから独立させるプラグインです。
 
-本プラグインはそういったニーズにお応えすべく作成しました。
+Redmine の「子チケットの値から算出」設定はシステム全体に適用されるため、プロジェクトごとに挙動を変えることができません。
+本プラグインを使うことで、特定のプロジェクトやステータスに応じて連動を制御できます。
 
-## 機能
-本プラグインでは、以下の機能を提供します。
-
-- 「開始日 / 期日」が「子チケットの値から算出」に設定されていても、**特定のプロジェクトのみ、「子チケットから独立」させる**
-- 独立させたいプロジェクトでも、特定のステータスのチケットのみ、「子チケットの値から算出」のままにして、期日の連動させる
+詳細は [こちら](https://github.com/RedminePower/redmine_studio_plugin/blob/master/docs/date_independent.md) をご覧ください。
 
 ## 対応バージョン
-- Redmine 4.x（4.2.3 にて動作確認済み）
+
 - Redmine 5.x（5.1.11 にて動作確認済み）
 - Redmine 6.x（6.1.1 にて動作確認済み）
 
@@ -31,31 +29,21 @@ Redmine のインストール先はお使いの環境によって異なります
 | Docker (公式イメージ) | `/usr/src/redmine` |
 | Bitnami | `/opt/bitnami/redmine` |
 
-以下を実行し、Redmineを再起動してください。
+以下を実行し、Redmine を再起動してください。
 
+```bash
+cd /var/lib/redmine/plugins
+git clone https://github.com/RedminePower/redmine_date_independent.git
+cd /var/lib/redmine
+bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_ENV=production
 ```
-$ cd /var/lib/redmine/plugins
-$ git clone https://github.com/RedminePower/redmine_date_independent.git
-$ cd /var/lib/redmine
-$ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent RAILS_ENV=production
-```
-
-## 使用方法
-
-1. プラグインをインストールすると、管理者メニューに「開始日/期日の独立」が追加されます。
-![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/febd0e09-ac77-47c4-810e-8521d6db9ef0)
-1. 「開始日/期日の独立」をクリックすると、一覧画面に遷移します。
-![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/bf0fbc0e-5b68-4596-8ca1-9a251261ddbc)
-1. 「新しい開始日/期日の独立」をクリックし、各種項目を入力し、「作成」ボタンをクリックしてください。
-![image](https://github.com/RedminePower/redmine_date_independent/assets/87136359/158da482-8b27-409b-9377-f6ee554ff3d8)
 
 ## アンインストール
-以下のコマンドを実行して、追加したDBを削除し、プラグインのフォルダを削除してください。
 
+以下を実行し、Redmine を再起動してください。
+
+```bash
+cd /var/lib/redmine
+bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent VERSION=0 RAILS_ENV=production
+rm -rf plugins/redmine_date_independent
 ```
-$ cd /var/lib/redmine
-$ bundle exec rake redmine:plugins:migrate NAME=redmine_date_independent VERSION=0 RAILS_ENV=production
-$ rm -rf plugins/redmine_date_independent
-```
-
-
